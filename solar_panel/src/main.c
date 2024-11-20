@@ -14,7 +14,8 @@ int main()
 
 	while (1)
 	{
-		uint16_t value = adc_read();
+		uint8_t pin = 1;
+		uint16_t value = adc_read(pin);
 		char string[10];
 		itoa(value, string, 10);
 		uart_puts(string);

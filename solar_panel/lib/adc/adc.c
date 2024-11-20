@@ -7,8 +7,10 @@ void adc_init()
 	ADCSRA |= (1 << ADEN) | (1 << ADPS2) | (1 << ADPS1) | (1 << ADPS0); // 0b10101111;  // ADSC 6bit spustí převod, 4bit konverze done, 125 kHz
 }
 
-uint16_t adc_read()
+uint16_t adc_read(uint8_t pin)
 {
+	ADMUX = (ADMUX & 0xF8) | pin;
+
 	ADCSRA |= (1 << ADSC); // start conversion
 
 	while (ADCSRA & (1 << ADSC))
