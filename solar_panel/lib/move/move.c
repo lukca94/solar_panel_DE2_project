@@ -38,22 +38,27 @@ bool isInRange(uint8_t pin1, uint8_t pin2, uint8_t range)
 		return false;
 }
 
-bool Rotate(uint8_t firstPin, uint8_t secondPin, uint8_t thirdPin, uint8_t fourthPin)
+bool Rotate(uint8_t firstPin, uint8_t secondPin, uint8_t thirdPin, uint8_t fourthPin, uint8_t rangeTolerance)
 {
 	uint8_t highestPin = FindHighest(firstPin, secondPin, thirdPin, fourthPin);
-	// group A= pin0, pin1 1
-	// group B= pin2, pin3 2
-	uint8_t range = 20; // tolerance for pin reading
+
+	// group A = pin0, pin1 1
+	// group B = pin2, pin3 2
+
 	uint8_t currentGroup;
 
 	if (highestPin == 0 | highestPin == 1)
+	{
 		currentGroup = 1;
+	}
 	else
+	{
 		currentGroup = 2;
+	}
 
 	if (currentGroup == 1)
 	{
-		while (isInRange(0, 1, range))
+		while (isInRange(0, 1, rangeTolerance))
 		{
 			if (highestPin == 0) // rotate left
 			{
@@ -67,7 +72,7 @@ bool Rotate(uint8_t firstPin, uint8_t secondPin, uint8_t thirdPin, uint8_t fourt
 	}
 	else
 	{
-		while (isInRange(2, 3, range))
+		while (isInRange(2, 3, rangeTolerance))
 		{
 			if (highestPin == 2) // rotate left
 			{
@@ -82,11 +87,13 @@ bool Rotate(uint8_t firstPin, uint8_t secondPin, uint8_t thirdPin, uint8_t fourt
 	return true; // rotation done
 }
 
-bool Tilt(uint8_t highestPin)
+bool Tilt(uint8_t firstPin, uint8_t secondPin, uint8_t thirdPin, uint8_t fourthPin, uint8_t rangeTolerance)
 {
-	// group A= pin0, pin1 1
-	// group B= pin2, pin3 2
-	uint8_t range = 20; // tolerance for pin reading
+	uint8_t highestPin = FindHighest(firstPin, secondPin, thirdPin, fourthPin);
+
+	// group A = pin0, pin1 1
+	// group B = pin2, pin3 2
+
 	uint8_t higherGroup;
 	if (highestPin == 0 | highestPin == 1)
 	{
@@ -99,14 +106,17 @@ bool Tilt(uint8_t highestPin)
 
 	if (higherGroup == 1) // tilt down
 	{
-		uint8_t firstPin = adc_read(2);
-		uint8_t thirdPin = adc_read(3);
 
-		while (abs(firstPin - thirdPin) > range)
+		while (isInRange(1, 3, rangeTolerance))
 		{
-			// tilt
-			uint8_t firstPin = adc_read(2);
-			uint8_t secondPin = adc_read(3);
+			// tilt -1
+		}
+	}
+	else // tilt down
+	{
+		while (isInRange(1, 3, rangeTolerance))
+		{
+			// tilt +1
 		}
 	}
 	return true;
