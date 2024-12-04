@@ -32,13 +32,37 @@ int main(void)
 
 	while (1)
 	{
-		uint8_t pin = 0;
-		uint16_t value = adc_read(pin);
-		char string[10];
-		itoa(value, string, 10);
+		uint8_t pin0 = 0;
+		uint16_t value0 = adc_read(pin0);
+		char string0[10];
+		itoa(value0, string0, 10);
 
-		uart_puts(string);
-		uart_puts("\n");
+		uart_puts(string0);
+		uart_puts(", ");
 
+		uint8_t pin1 = 1;
+		uint16_t value1 = adc_read(pin1);
+		char string1[10];
+		itoa(value1, string1, 10);
+
+		uart_puts(string1);
+		uart_puts(", ");
+
+		uint8_t pin2 = 2;
+		uint16_t value2 = adc_read(pin2);
+		char string2[10];
+		itoa(value2, string2, 10);
+
+		uart_puts(string2);
+		uart_puts(", ");
+
+		uint8_t pin3 = 3;
+		uint16_t value3 = adc_read(pin3);
+		char string3[10];
+		itoa(value3, string3, 10);
+
+		uart_puts(string3);
+		uart_puts("\r\n");
+		_delay_ms(100);
 	}
 }

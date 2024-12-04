@@ -13,7 +13,7 @@ void ServoInit()
 	ICR1 = 19999; // 16 MHz / (8 * 50 Hz) - 1 = 19999
 }
 
-void ServoPinSet(outputPin)
+void ServoPinSet(uint8_t outputPin)
 {
 	// Disable all outputs
 	DDRB = 0;
@@ -21,8 +21,11 @@ void ServoPinSet(outputPin)
 	DDRB |= (1 << outputPin);
 }
 
-void Servo(position)
+void Servo(uint16_t position) // 0-180
 {
+	uint16_t value = position * 3200 / 180 + 1500;
+
 	// Nastavení nové hodnoty pro OCR1A
 	OCR1A = position;
+	// 4700 max 1500 min
 }

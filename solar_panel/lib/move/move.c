@@ -5,7 +5,7 @@
 #include "adc.h"
 #include "servo.h"
 
-uint8_t FindHighest(firstPin, secondPin, thirdPin, fourthPin)
+uint8_t FindHighest(uint8_t firstPin, uint8_t secondPin, uint8_t thirdPin, uint8_t fourthPin)
 {
 
 	uint16_t firstValue = adc_read(firstPin);
@@ -28,7 +28,7 @@ uint8_t FindHighest(firstPin, secondPin, thirdPin, fourthPin)
 	}
 	return highest;
 }
-bool isInRange(pin1, pin2, range)
+bool IsInRange(uint8_t pin1, uint8_t pin2, uint8_t range)
 {
 	uint8_t value1 = adc_read(pin1);
 	uint8_t value2 = adc_read(pin2);
@@ -39,9 +39,12 @@ bool isInRange(pin1, pin2, range)
 		return false;
 }
 
-bool Rotate(PWM_PIN, firstPin, secondPin, thirdPin, fourthPin, rangeTolerance)
+bool Rotate(uint8_t PWM_PIN, uint8_t firstPin, uint8_t secondPin, uint8_t thirdPin, uint8_t fourthPin, uint8_t rangeTolerance)
 {
 	ServoPinSet(PWM_PIN);
+	// default rotation
+	uint16_t position = 90;
+	Servo(position);
 
 	uint8_t highestPin = FindHighest(firstPin, secondPin, thirdPin, fourthPin);
 
@@ -61,38 +64,45 @@ bool Rotate(PWM_PIN, firstPin, secondPin, thirdPin, fourthPin, rangeTolerance)
 
 	if (currentGroup == 1)
 	{
-		while (isInRange(0, 1, rangeTolerance))
+		while (IsInRange(0, 1, rangeTolerance))
 		{
 			if (highestPin == 0) // rotate left
 			{
-				// rotate -1
+				position--;
+				Servo(position);
 			}
-			else
+			else // rotate right
 			{
-				// rotate +1
+				position++;
+				Servo(position);
 			}
 		}
 	}
 	else
 	{
-		while (isInRange(2, 3, rangeTolerance))
+		while (IsInRange(2, 3, rangeTolerance))
 		{
 			if (highestPin == 2) // rotate left
 			{
-				// rotate -1
+				position--;
+				Servo(position);
 			}
-			else
+			else // rotate right
 			{
-				// rotate +1
+				position++;
+				Servo(position);
 			}
 		}
 	}
 	return true; // rotation done
 }
 
-bool Tilt(PWM_PIN, firstPin, secondPin, thirdPin, fourthPin, rangeTolerance)
+bool Tilt(uint8_t PWM_PIN, uint8_t firstPin, uint8_t secondPin, uint8_t thirdPin, uint8_t fourthPin, uint8_t rangeTolerance)
 {
 	ServoPinSet(PWM_PIN);
+	// default rotation
+	uint16_t position = 90;
+	Servo(position);
 
 	uint8_t highestPin = FindHighest(firstPin, secondPin, thirdPin, fourthPin);
 
@@ -112,16 +122,18 @@ bool Tilt(PWM_PIN, firstPin, secondPin, thirdPin, fourthPin, rangeTolerance)
 	if (higherGroup == 1) // tilt down
 	{
 
-		while (isInRange(1, 3, rangeTolerance))
+		while (IsInRange(1, 3, rangeTolerance))
 		{
-			// tilt -1
+			position--;
+			Servo(position);
 		}
 	}
 	else // tilt down
 	{
-		while (isInRange(1, 3, rangeTolerance))
+		while (IsInRange(1, 3, rangeTolerance))
 		{
-			// tilt +1
+			position++;
+			Servo(position);
 		}
 	}
 	return true;
