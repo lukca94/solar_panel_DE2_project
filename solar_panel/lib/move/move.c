@@ -3,8 +3,9 @@
 #include <stdbool.h>
 
 #include "adc.h"
+#include "servo.h"
 
-uint8_t FindHighest(uint8_t firstPin, uint8_t secondPin, uint8_t thirdPin, uint8_t fourthPin)
+uint8_t FindHighest(firstPin, secondPin, thirdPin, fourthPin)
 {
 
 	uint16_t firstValue = adc_read(firstPin);
@@ -27,7 +28,7 @@ uint8_t FindHighest(uint8_t firstPin, uint8_t secondPin, uint8_t thirdPin, uint8
 	}
 	return highest;
 }
-bool isInRange(uint8_t pin1, uint8_t pin2, uint8_t range)
+bool isInRange(pin1, pin2, range)
 {
 	uint8_t value1 = adc_read(pin1);
 	uint8_t value2 = adc_read(pin2);
@@ -38,8 +39,10 @@ bool isInRange(uint8_t pin1, uint8_t pin2, uint8_t range)
 		return false;
 }
 
-bool Rotate(uint8_t firstPin, uint8_t secondPin, uint8_t thirdPin, uint8_t fourthPin, uint8_t rangeTolerance)
+bool Rotate(PWM_PIN, firstPin, secondPin, thirdPin, fourthPin, rangeTolerance)
 {
+	ServoPinSet(PWM_PIN);
+
 	uint8_t highestPin = FindHighest(firstPin, secondPin, thirdPin, fourthPin);
 
 	// group A = pin0, pin1 1
@@ -87,8 +90,10 @@ bool Rotate(uint8_t firstPin, uint8_t secondPin, uint8_t thirdPin, uint8_t fourt
 	return true; // rotation done
 }
 
-bool Tilt(uint8_t firstPin, uint8_t secondPin, uint8_t thirdPin, uint8_t fourthPin, uint8_t rangeTolerance)
+bool Tilt(PWM_PIN, firstPin, secondPin, thirdPin, fourthPin, rangeTolerance)
 {
+	ServoPinSet(PWM_PIN);
+
 	uint8_t highestPin = FindHighest(firstPin, secondPin, thirdPin, fourthPin);
 
 	// group A = pin0, pin1 1
