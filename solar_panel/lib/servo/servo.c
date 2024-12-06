@@ -1,7 +1,10 @@
 #include <stdio.h>
 #include <avr/io.h>
+#include <util/delay.h>
+#include <stdlib.h>
 
 #include "servo.h"
+#include "uart.h"
 
 void ServoInit()
 {
@@ -23,9 +26,16 @@ void ServoPinSet(uint8_t outputPin)
 
 void Servo(uint16_t position) // 0-180
 {
-	uint16_t value = position * 3200 / 180 + 1500;
-
+	uint16_t value = (position * 17) + 1000;
+	
 	// Nastavení nové hodnoty pro OCR1A
-	OCR1A = position;
+	OCR1A = value;
+
+	char string0[10];
+	itoa(value, string0, 10);
+
+	uart_puts(string0);
+	uart_puts("\n");
 	// 4700 max 1500 min
+	_delay_ms(100);
 }

@@ -13,6 +13,7 @@
 #include "uart.h"
 #include "adc.h"
 #include "servo.h"
+#include "move.h"
 
 #define PHOTO_RES1 PC0
 #define PHOTO_RES2 PC1
@@ -28,41 +29,46 @@ int main(void)
 	adc_init();
 	SREG |= (1 << SREG_I); // enable interrupts probably
 
-	DDRC = DDRC & ~(1 << PHOTO_RES1); // set input
+	DDRC = DDRC & ~(1 << PHOTO_RES1) & ~(1 << PHOTO_RES2) & ~(1 << PHOTO_RES3) & ~(1 << PHOTO_RES4); // set input
+
+	ServoPinSet(PWM_PORT_ANGLE);
+	// OCR1A = 1000;
+	Rotate(PWM_PORT_ANGLE, PHOTO_RES1, PHOTO_RES2, PHOTO_RES3, PHOTO_RES4, 70);
+	// Tilt(PWM_PORT_TILT, PHOTO_RES1, PHOTO_RES2, PHOTO_RES3, PHOTO_RES4, 70);
 
 	while (1)
 	{
-		uint8_t pin0 = 0;
-		uint16_t value0 = adc_read(pin0);
-		char string0[10];
-		itoa(value0, string0, 10);
+		// uint8_t pin0 = 0;
+		// uint16_t value0 = adc_read(pin0);
+		// char string0[10];
+		// itoa(value0, string0, 10);
 
-		uart_puts(string0);
-		uart_puts(", ");
+		// uart_puts(string0);
+		// uart_puts(", ");
 
-		uint8_t pin1 = 1;
-		uint16_t value1 = adc_read(pin1);
-		char string1[10];
-		itoa(value1, string1, 10);
+		// uint8_t pin1 = 1;
+		// uint16_t value1 = adc_read(pin1);
+		// char string1[10];
+		// itoa(value1, string1, 10);
 
-		uart_puts(string1);
-		uart_puts(", ");
+		// uart_puts(string1);
+		// uart_puts(", ");
 
-		uint8_t pin2 = 2;
-		uint16_t value2 = adc_read(pin2);
-		char string2[10];
-		itoa(value2, string2, 10);
+		// uint8_t pin2 = 2;
+		// uint16_t value2 = adc_read(pin2);
+		// char string2[10];
+		// itoa(value2, string2, 10);
 
-		uart_puts(string2);
-		uart_puts(", ");
+		// uart_puts(string2);
+		// uart_puts(", ");
 
-		uint8_t pin3 = 3;
-		uint16_t value3 = adc_read(pin3);
-		char string3[10];
-		itoa(value3, string3, 10);
+		// uint8_t pin3 = 3;
+		// uint16_t value3 = adc_read(pin3);
+		// char string3[10];
+		// itoa(value3, string3, 10);
 
-		uart_puts(string3);
-		uart_puts("\r\n");
-		_delay_ms(100);
+		// uart_puts(string3);
+		// uart_puts("\r\n");
+		// _delay_ms(100);
 	}
 }
