@@ -72,7 +72,7 @@ void Rotate(uint8_t firstPin, uint8_t secondPin, uint8_t thirdPin, uint8_t fourt
 	// group A = pin0, pin1 1
 	// group B = pin2, pin3 2
 
-	// char string0[10];
+	char string0[10];
 	// itoa(highestPin, string0, 10);
 
 	// uart_puts(string0);
@@ -100,20 +100,20 @@ void Rotate(uint8_t firstPin, uint8_t secondPin, uint8_t thirdPin, uint8_t fourt
 				position++;
 				ServoAngle(position);
 
-				// itoa(position, string0, 10);
-				// uart_puts("position:");
-				// uart_puts(string0);
-				// uart_puts("\n");
+				itoa(position, string0, 10);
+				uart_puts("position:");
+				uart_puts(string0);
+				uart_puts("\n");
 			}
 			else
 			{
 				position--;
 				ServoAngle(position);
 
-				// itoa(position, string0, 10);
-				// uart_puts("position:");
-				// uart_puts(string0);
-				// uart_puts("\n");
+				itoa(position, string0, 10);
+				uart_puts("position:");
+				uart_puts(string0);
+				uart_puts("\n");
 			}
 		}
 	}
@@ -126,20 +126,20 @@ void Rotate(uint8_t firstPin, uint8_t secondPin, uint8_t thirdPin, uint8_t fourt
 				position--;
 				ServoAngle(position);
 
-				// itoa(position, string0, 10);
-				// uart_puts("position:");
-				// uart_puts(string0);
-				// uart_puts("\n");
+				itoa(position, string0, 10);
+				uart_puts("position:");
+				uart_puts(string0);
+				uart_puts("\n");
 			}
 			else
 			{
 				position++;
 				ServoAngle(position);
 
-				// itoa(position, string0, 10);
-				// uart_puts("position:");
-				// uart_puts(string0);
-				// uart_puts("\n");
+				itoa(position, string0, 10);
+				uart_puts("position:");
+				uart_puts(string0);
+				uart_puts("\n");
 			}
 		}
 	}

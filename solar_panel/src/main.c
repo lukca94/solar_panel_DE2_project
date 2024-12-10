@@ -4,6 +4,78 @@
 #include <avr/interrupt.h>
 #include <stdbool.h>
 
+/////////////////////////////////////////////////////////
+#include <twi.h>   // I2C/TWI library for AVR-GCC
+#include <stdio.h> // C library for `sprintf`
+#include "timer.h"
+#include "oled.h"
+
+// const uint16_t image_data[10] = {
+// 	// Binary example of picture for OLED display
+// 	0x40, 0x00, 0x48, 0x00, 0x00, 0x00, 0xc4, 0x00, 0x44, 0x00, 0x28, 0x00, 0x18, 0x00, 0x0c, 0x00, 0x04, 0x00, 0x00, 0x00};
+
+// const uint16_t image_data[10] = {
+// 	// Binary example of picture for OLED display
+// 	0x40, 0x00, 0x48, 0x00, 0x00, 0x00, 0xc4, 0x00, 0x44, 0x00, 0x28, 0x00, 0x18, 0x00, 0x0c, 0x00, 0x04, 0x00, 0x00, 0x00};
+
+// -- Function definitions -------------------------------------------
+void oled_setup(void)
+{
+	oled_init(OLED_DISP_ON);
+	oled_clrscr();
+
+	oled_gotoxy(4, 1);
+	oled_charMode(NORMALSIZE);
+	oled_puts("Solar system");
+
+	oled_drawRect(100, 20, 20, 1, WHITE);
+
+	oled_gotoxy(0, 3);
+	oled_puts("Current:");
+
+	oled_gotoxy(15, 3);
+	oled_puts("mA");
+
+	oled_gotoxy(0, 5);
+	oled_puts("Power:");
+
+	oled_gotoxy(15, 5);
+	oled_puts("W/m2");
+
+	oled_gotoxy(0, 7);
+	oled_puts("Current:");
+
+	oled_gotoxy(15, 7);
+	oled_puts("A");
+	// Copy buffer to display RAM
+	oled_display();
+}
+
+void draw_image(const uint16_t *img_data, uint8_t start_x, uint8_t start_y)
+{
+	// Procházíme řádky obrázku (10 řádků)
+	for (uint8_t y = 0; y < 10; y++)
+	{
+		// Načteme data pro aktuální řádek (10 bitů)
+		uint16_t row_data = img_data[y];
+
+		// Procházíme sloupce obrázku (10 pixelů v řádku)
+		for (uint8_t x = 0; x < 10; x++)
+		{
+			// Zjistíme, zda je aktuální pixel bílý (1) nebo černý (0)
+			if (row_data & (1 << (9 - x)))
+			{													 // Posuneme bit na správnou pozici
+				oled_drawPixel(start_x + x, start_y + y, WHITE); // Vykreslíme bílý pixel
+			}
+			else
+			{
+				oled_drawPixel(start_x + x, start_y + y, BLACK); // Vykreslíme černý pixel
+			}
+		}
+	}
+}
+/////////////////////////////////////////////////////////
+
 #define F_CPU 16000000UL // Frekvence CPU (16 MHz pro Arduino Uno)
 #define PWM_PORT_ANGLE PB1
 #define PWM_PORT_TILT PB2
@@ -20,8 +92,21 @@
 #define PHOTO_RES3 PC2
 #define PHOTO_RES4 PC3
 
+const uint16_t image_data[20] = {
+	// Binary example of picture for OLED display
+	0x40, 0x00, 0x48, 0x00, 0x00, 0x00, 0xc4, 0x00, 0x44, 0x00, 0x28, 0x00, 0x18, 0x00, 0x0c, 0x00, 0x04, 0x00, 0x00, 0x00};
+
 int main(void)
-{
+{ //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// char oled_msg[10];
+	twi_init();
+	oled_setup();
+
+	draw_image(image_data, 5, 0); // Draw at position (10, 5)
+
+	draw_image(image_data, 109, 0); // Draw at position (10, 5)
+
+	////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	uart_init(UART_BAUD_SELECT(250000, F_CPU));
 
@@ -42,6 +127,24 @@ int main(void)
 
 	while (1)
 	{
+		///////////////////////////////////////////////////////////////////////////////////////////////////////
+		uint8_t pin = 6;
+		uint16_t value = adc_read(pin);
+		char string[10];
+
+		value = 5 - ((value * 5 / 510));
+
+		itoa(value, string, 10);
+		uart_puts(string);
+		uart_puts("\n");
+		_delay_ms(100);
+
+		oled_gotoxy(11, 7);
+		oled_puts(string);
+		oled_puts("  ");
+		oled_display();
+		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 		// uint8_t pin0 = 0;
 		// uint16_t value0 = adc_read(pin0);
 		// char string0[10];
