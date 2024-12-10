@@ -50,8 +50,8 @@ uint8_t FindHighest(uint8_t firstPin, uint8_t secondPin, uint8_t thirdPin, uint8
 }
 bool IsInRange(uint8_t pin1, uint8_t pin2, uint64_t position, uint8_t range)
 {
-	if ((0 > position) |(position > 180))
-		return false;
+	// if ((0 > position) |(position > 180))
+	// 	return false;
 
 	uint16_t value1 = adc_read(pin1);
 	uint16_t value2 = adc_read(pin2);
