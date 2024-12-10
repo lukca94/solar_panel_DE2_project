@@ -5,7 +5,8 @@
 #define SERVO_H
 
 void ServoInit();
-void ServoPinSet(uint8_t outputPin);
-void Servo(uint16_t position);
+void ServoPinSet(uint8_t outputPinAngle, uint8_t outputPinTilt);
+void ServoAngle(uint64_t position);
+void ServoTilt(uint64_t position);
 
-#endif //SERVO_H
+#endif // SERVO_H

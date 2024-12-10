@@ -22,19 +22,23 @@
 
 int main(void)
 {
-	ServoInit();
 
 	uart_init(UART_BAUD_SELECT(250000, F_CPU));
+
+	ServoInit();
+	ServoPinSet(PWM_PORT_ANGLE, PWM_PORT_TILT);
 
 	adc_init();
 	SREG |= (1 << SREG_I); // enable interrupts probably
 
 	DDRC = DDRC & ~(1 << PHOTO_RES1) & ~(1 << PHOTO_RES2) & ~(1 << PHOTO_RES3) & ~(1 << PHOTO_RES4); // set input
 
-	ServoPinSet(PWM_PORT_ANGLE);
-	// OCR1A = 1000;
-	Rotate(PWM_PORT_ANGLE, PHOTO_RES1, PHOTO_RES2, PHOTO_RES3, PHOTO_RES4, 70);
-	// Tilt(PWM_PORT_TILT, PHOTO_RES1, PHOTO_RES2, PHOTO_RES3, PHOTO_RES4, 70);
+	// OCR1B = 2000;
+	ServoAngle(90);
+	ServoTilt(90);
+
+	Rotate(PHOTO_RES1, PHOTO_RES2, PHOTO_RES3, PHOTO_RES4, 50);
+	Tilt(PHOTO_RES1, PHOTO_RES2, PHOTO_RES3, PHOTO_RES4, 50);
 
 	while (1)
 	{
