@@ -20,6 +20,17 @@ Structure of code
 - automative servo motor rotation
 - values storing
 - OLED displaying values
+
+### Code
+#### ADC
+In order to get analog values we need to create a use internal ADC of the ATmega 328P, this ADC can be used with pins PC0-PC7.
+
+#### Servo
+This library generates PWM that is required for servo operation. An input in range of 0°-180° gets a value for the PWM generator and PWM signal is outputed for the servos.
+
+#### Move 
+These functions are responsible for solar panel alignment in the light source direction. Utilizing four photo resistors, one with the highest light value is selected and in accordance with its position, the panel is rotated. This rotation is stopped when two of the phoresistors on reach the same value. Now begins the tilting phase. Again the photo resistors are checked and the solar panel starts to tilt in direction of the highest value until they are all outputing the same value.
+
   
 ### Hardware setup
 Hardware connection is showed on schematic below.
@@ -96,15 +107,17 @@ This component can change its resistivity depending on the intensity of light fa
 
 
 ### Final model
-![image](https://github.com/user-attachments/assets/d5e304b8-9b7b-4a56-8065-40c3d68b44ec)
+![image](https://github.com/user-attachments/assets/d5e304b8-9b7b-4a56-8065-40c3d68b44ec)\
 *Final prototype*
 
 The construction of the final product was created using cardboard and adhesive tape. For the electronics we used a breadboard. We managed to make the upper platform (location for the solar panel) rotatable, photo resistors are placed one in each corner.
 
 The function is to set the default position, then find the A/D converter with the maximum value. It is determined which resistor it is, and the plate starts to rotate using the first servo behind this resistor, until the neighboring resistor has the same value ($\pm$). The second servo is then started, comparing the values of the photoresistors on opposite corners until the same value is reached again. Once the correct value has been set, the display will begin to show the current values. 
 
-![IMG_20241210_173520](https://github.com/user-attachments/assets/764eb051-6cd5-45c0-9339-5018a1523d63)
+![IMG_20241210_173520](https://github.com/user-attachments/assets/764eb051-6cd5-45c0-9339-5018a1523d63)\
 *Working display*
+
+#### Video of prototype at work
 
 ### Used parts
 
