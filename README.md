@@ -81,7 +81,17 @@ $I = (-562 + \text{A/D Value}) \cdot \frac{1}{27,8}$
 Jako display je využíván OLED s rozlišením 168x64. Display komuniku je přes IIC.
 
 
+
+### Final model
+![image](https://github.com/user-attachments/assets/d5e304b8-9b7b-4a56-8065-40c3d68b44ec)
+
+![IMG_20241210_173520](https://github.com/user-attachments/assets/764eb051-6cd5-45c0-9339-5018a1523d63)
+
+
+
+
 ### Used parts
+
  - Arduino NANO
  - 2x Servo motor SG90
  - OLED display (168x64, IIC)
