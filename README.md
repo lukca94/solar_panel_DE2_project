@@ -94,15 +94,13 @@ With help of ChatGPT there was a try displaying picture of lighting. Unfortunate
 ![IMG_20241210_173520](https://github.com/user-attachments/assets/764eb051-6cd5-45c0-9339-5018a1523d63)
 
 
-
-
 ### Used parts
 
  - Arduino NANO
  - 2x Servo motor SG90
  - OLED display (168x64, IIC)
  - 4x Photoresistor
- - Current sensor ACS712
+ - Current sensor ACS712 (For demonstration there was only used potenciometer)
 
 ### Sources
 [1] https://www.studiopieters.nl/arduino-nano-pinout/ \
@@ -111,3 +109,5 @@ With help of ChatGPT there was a try displaying picture of lighting. Unfortunate
 [4] https://www.laskakit.cz/arduino-proudovy-senzor-5a-acs712/?utm_source=google&utm_medium=cpc&utm_campaign=1_PLA_All_ROAS_%5BCZ%5D_tROAS_570%2F350&utm_id=1371265813&gad_source=1&gclid=CjwKCAiAjeW6BhBAEiwAdKltMkxjIJc-CQQdpvqv7aDmpNT8D9rHq1pxshQiIphx7CQkUo7BzBrefRoCjq4QAvD_BwE \
 [5] https://www.laskakit.cz/user/related_files/acs712.pdf \
 [6] https://www.hwkitchen.cz/graficky-displej-oled-096-128x64-i2c-bily/?gad_source=1&gclid=CjwKCAiAjeW6BhBAEiwAdKltMsdv_tMKsyUl8U-bwB8IE8ftAJTWY9HhmumnMm_Rn9zQiKFi_XuZ2xoCNjgQAvD_BwE \
+[7] https://github.com/tomas-fryza/avr-course
+[8] https://chatgpt.com/
