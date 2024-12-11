@@ -114,7 +114,8 @@ The construction of the final product was created using cardboard and adhesive t
 
 The function is to set the default position, then find the A/D converter with the maximum value. It is determined which resistor it is, and the plate starts to rotate using the first servo behind this resistor, until the neighboring resistor has the same value ($\pm$). The second servo is then started, comparing the values of the photoresistors on opposite corners until the same value is reached again. Once the correct value has been set, the display will begin to show the current values. 
 
-![IMG_20241210_173520](https://github.com/user-attachments/assets/764eb051-6cd5-45c0-9339-5018a1523d63)\
+![image](https://github.com/user-attachments/assets/13ec65c2-8b2a-4317-bc04-4b4371f648e9)\
+
 *Working display*
 
 #### Video of prototype at work
