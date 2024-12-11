@@ -78,8 +78,14 @@ $I = (-562 + \text{A/D Value}) \cdot \frac{1}{27,8}$
 ![image](https://github.com/user-attachments/assets/7bee33f4-e9fd-4415-8c4b-683bdc1ebba1) \
 *OLED display, from [6]* 
 
-Jako display je využíván OLED s rozlišením 168x64. Display komuniku je přes IIC.
-
+Used libraries from [7]: \
+              
+              <twi.h>
+              <oled.h>
+              <font.h>
+              
+Display works based on OLED technology and comunnicates with Arduino by I2C. Using pre-made libraries, such as twi or oled we were able to disply crutial parameters, which are widely used, when it comes to generating and monitoring electricity with solar panels. Due to a missing solar panel we had to improvise and set the current value based on intensity of the light comming to photoresistor, which led the panel directly to light source. Main thought was displaying range, in which the servos operates but because of different ranges of servos, we weren`t able to do that. Due to lack of time for demonstrating this work, we thought of not displaying most useful parameter and that is generated power in Watts. Instead of this the display showed intensity of light in percents (when 2 photoresistors are lined up, intensity shows 50%, when all of them are lined up, it shows 100%)\
+With help of ChatGPT there was a try displaying picture of lighting. Unfortunately this try was not succesful [8].\
 
 
 ### Final model
