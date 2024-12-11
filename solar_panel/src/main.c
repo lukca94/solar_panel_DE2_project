@@ -132,9 +132,9 @@ int main(void)
 		uint16_t value = adc_read(pin);
 		char string[10];
 
-		value = 5 - ((value * 5 / 510));
+		value = (-565 + value) * (1/27.8); //Vale by chěla předělat do floatu hádám
 
-		itoa(value, string, 10);
+		itoa(value, string, 10); //A tohle taky nebo vypisovat rovnou ten float
 		uart_puts(string);
 		uart_puts("\n");
 		_delay_ms(100);
