@@ -31,4 +31,5 @@ Hardware connection is showed on schematic below.
 
 #### Display 
 
-### Conclusion
+### Used parts
+
