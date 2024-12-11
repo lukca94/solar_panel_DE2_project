@@ -119,6 +119,8 @@ The function is to set the default position, then find the A/D converter with th
 
 #### Video of prototype at work
 
+https://youtu.be/-qSb2klgIa4
+
 ### Used parts
 
  - Arduino NANO
