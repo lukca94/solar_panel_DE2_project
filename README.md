@@ -53,46 +53,58 @@ The servo determining the angle is set with the following values: $OCR1A = 1 500
 
 To set the tilt: $OCR1B = 900 - 2 000$.
 
-#### Photoresistors
 
 
 #### Current sensor
 ![image](https://github.com/user-attachments/assets/91da927b-1b6a-47b6-bb32-0f8962081bee) \
 *Current sensor, from[4]* 
 
-Z datasheetu [5], se můžeme dočíst, že senzor dává výstupní hodnoty jako napětí. Díky tomu můžeme využít funkce vytvořené pro čtení hodnot z fotorezistorů. Dále se můžeme dočíst, že pro proud $I = 0\,A$ se výstupní napětí senzoru rovná $U_{0A} = U_{cc}/2  = 2,5 \, V$. Senzor disponuje citlivostí ($185 \, mV/A$). Z těchto hodnot můžeme snadno vypočítat hodnoty výstupního napětí pro celý rozsah senzoru. 
+From the datasheet [5], we can read that the sensor gives output values as voltage. Thanks to this, we can use a function created to read values from photoresistors. Furthermore, we can read that for a current $I = 0\,A$ the sensor output voltage is equal to $U_{0A} = U_{cc}/2 = 2.5 \,V$. The sensor has a sensitivity of ($185 \, mV/A$). From these values, we can easily calculate the output voltage values for the entire sensor range. 
 
-$U_{OUTmax} = U_{0A} + (I \cdot sensitivity) = 2,5 + (5 \cdot 0,185) = 3,425 \,V$
+$U_{OUTmax} = U_{0A} + (I \cdot sensitivity) = 2.5 + (5 \cdot 0.185) = 3.425 \,V$
 
-Z této hodnoty a faktu, že pro $U = 5\, V$ má převodník hodnotu 1023, můžeme určit hodnotu A/D převodníku pro rozsah proudů:
+From this value and the fact that for $U = 5\,V$ the converter has a value of 1023, we can determine the value of the A/D converter for the current range:
 
 $x = \frac{U_{OUTmax}}{U_{max}} \cdot MAX_{A/D} = \frac{3,425}{5} \cdot 1023 \approx 701$
 
-Pro proud $I = 5\,A$ můžeme snadno odvodit hodnotu převodníku 562.
+For a current $I = 5\,A$ we can easily derive the value of the converter 562.
 
-Pro výpis proudu můžeme použít rovnici:
+To list the current we can use the equation:
 
-$I = (-562 + \text{A/D Value}) \cdot \frac{1}{27,8}$
+$I = (-562 + \text{A/D Value}) \cdot \frac{1}{27.8}$
+
 
 #### Display 
 ![image](https://github.com/user-attachments/assets/7bee33f4-e9fd-4415-8c4b-683bdc1ebba1) \
 *OLED display, from [6]* 
 
-Used libraries from [7]: \
+Used libraries from [7]: 
               
               <twi.h>
               <oled.h>
               <font.h>
               
 Display works based on OLED technology and comunnicates with Arduino by I2C. Using pre-made libraries, such as twi or oled we were able to disply crutial parameters, which are widely used, when it comes to generating and monitoring electricity with solar panels. Due to a missing solar panel we had to improvise and set the current value based on intensity of the light comming to photoresistor, which led the panel directly to light source. Main thought was displaying range, in which the servos operates but because of different ranges of servos, we weren`t able to do that. Due to lack of time for demonstrating this work, we showed on display parameters, that would be crucial for another work. Instead of this the display showed intensity of light in percents (on photo the intensity should be on the last row) (when 2 photoresistors are lined up, intensity shows 50%, when all of them are lined up, it shows 100%)\
-With help of ChatGPT there was a try displaying picture of lighting. Unfortunately this try was not succesful [8].\
+
+
+
+#### Photoresistors
+![image](https://github.com/user-attachments/assets/487535ff-05be-4f0f-b1c6-c38676dc2e31)\
+*Photoresistor, from[9]*
+
+This component can change its resistivity depending on the intensity of light falling on the sensor. The size of the resistance varies $R = 50 \, k \Omega - 5 \, M\Omega$. Because of the large value, we had to connect a resistor in series to the component ($R = 10 \, k\Omega$), thus creating a resistive divider, from which we then read the A/D converter data. The adc library is used for this. 
 
 
 ### Final model
 ![image](https://github.com/user-attachments/assets/d5e304b8-9b7b-4a56-8065-40c3d68b44ec)
+*Final prototype*
+
+The construction of the final product was created using cardboard and adhesive tape. For the electronics we used a breadboard. We managed to make the upper platform (location for the solar panel) rotatable, photo resistors are placed one in each corner.
+
+The function is to set the default position, then find the A/D converter with the maximum value. It is determined which resistor it is, and the plate starts to rotate using the first servo behind this resistor, until the neighboring resistor has the same value ($\pm$). The second servo is then started, comparing the values of the photoresistors on opposite corners until the same value is reached again. Once the correct value has been set, the display will begin to show the current values. 
 
 ![IMG_20241210_173520](https://github.com/user-attachments/assets/764eb051-6cd5-45c0-9339-5018a1523d63)
-
+*Working display*
 
 ### Used parts
 
@@ -109,5 +121,5 @@ With help of ChatGPT there was a try displaying picture of lighting. Unfortunate
 [4] https://www.laskakit.cz/arduino-proudovy-senzor-5a-acs712/?utm_source=google&utm_medium=cpc&utm_campaign=1_PLA_All_ROAS_%5BCZ%5D_tROAS_570%2F350&utm_id=1371265813&gad_source=1&gclid=CjwKCAiAjeW6BhBAEiwAdKltMkxjIJc-CQQdpvqv7aDmpNT8D9rHq1pxshQiIphx7CQkUo7BzBrefRoCjq4QAvD_BwE \
 [5] https://www.laskakit.cz/user/related_files/acs712.pdf \
 [6] https://www.hwkitchen.cz/graficky-displej-oled-096-128x64-i2c-bily/?gad_source=1&gclid=CjwKCAiAjeW6BhBAEiwAdKltMsdv_tMKsyUl8U-bwB8IE8ftAJTWY9HhmumnMm_Rn9zQiKFi_XuZ2xoCNjgQAvD_BwE \
-[7] https://github.com/tomas-fryza/avr-course
-[8] https://chatgpt.com/
+[7] https://github.com/tomas-fryza/avr-course \
+[8] https://www.deepl.com/cs/translator
