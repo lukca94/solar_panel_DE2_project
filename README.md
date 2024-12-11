@@ -84,7 +84,7 @@ Used libraries from [7]:
               <oled.h>
               <font.h>
               
-Display works based on OLED technology and comunnicates with Arduino by I2C. Using pre-made libraries, such as twi or oled we were able to display crutial parameters, which are widely used, when it comes to generating and monitoring electricity with solar panels. Due to a missing solar panel we had to improvise and set the current value based on intensity of the light comming to photoresistor, which led the panel directly to light source. Main thought was displaying range, in which the servos operates but because of different ranges of servos, we weren`t able to do that. In the we decided to display current in mA, and intensity od the light. Intensity is calculeted from avarege of the 4 photoresistors and calculated to percetage of maximum range we measured.\
+Display works based on OLED technology and comunnicates with Arduino by I2C. Using pre-made libraries, such as twi or oled we were able to display crutial parameters, which are widely used, when it comes to generating and monitoring electricity with solar panels. Due to a missing solar panel we had to improvise and set the current value based on intensity of the light comming to photoresistor, which led the panel directly to light source. Main thought was displaying range, in which the servos operates but because of different ranges of servos, we weren`t able to do that. In the we decided to display current in mA, and intensity od the light. Intensity is calculeted from avarege of the 4 photoresistors and calculated to percetage of maximum range we measured.
 
 
 
