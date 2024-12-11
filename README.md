@@ -31,17 +31,18 @@ The pins PB1 (D9) and PB2 (D10) are used to control the resistors. The control i
 
 
 ![image](https://github.com/user-attachments/assets/803730a9-5853-4a67-862d-e48125dab336) \
-*Arduino NANO pinout, from [1]* \
+*Arduino NANO pinout, from [1]* 
 
 ### Software setup
 
 #### Servo
 ![image](https://github.com/user-attachments/assets/7abaa3bd-5444-482b-98fa-11c60e8b1147) \
-*Servo control according to datasheet, from [2]* \
+*Servo control according to datasheet, from [2]* 
 
 According to the servo datasheet, we can find out that a PWM signal of the exact frequency and duty cycle is needed. The easiest way to achieve this signal is by using Timer1, which is already built into the ATMega328P. \
 ![image](https://github.com/user-attachments/assets/25499d6c-944d-4033-aecf-a007b1f6d0ba) \
-*Timer1 features, from [3]* \
+*Timer1 features, from [3]* 
+
 The easiest way to control the servo is mode 14 (Fast PWM). In this particular case, we can set the top counter value using the ICR1 register, this is convenient because it is very easy to set the 50 Hz needed for control. The value of the register can be calculated using the relation:
 
 $TOP = \frac{f_{CPU}}{N\cdot f_{desired}} - 1$
@@ -57,7 +58,8 @@ To set the tilt: $OCR1B = 900 - 2 000$.
 
 #### Current sensor
 ![image](https://github.com/user-attachments/assets/91da927b-1b6a-47b6-bb32-0f8962081bee) \
-*Current sensor, from[4]* \
+*Current sensor, from[4]* 
+
 Z datasheetu [5], se můžeme dočíst, že senzor dává výstupní hodnoty jako napětí. Díky tomu můžeme využít funkce vytvořené pro čtení hodnot z fotorezistorů. Dále se můžeme dočíst, že pro proud $I = 0\,A$ se výstupní napětí senzoru rovná $U_{0A} = U_{cc}/2  = 2,5 \, V$. Senzor disponuje citlivostí ($185 \, mV/A$). Z těchto hodnot můžeme snadno vypočítat hodnoty výstupního napětí pro celý rozsah senzoru. 
 
 $U_{OUTmax} = U_{0A} + (I \cdot sensitivity) = 2,5 + (5 \cdot 0,185) = 3,425 \,V$
@@ -74,7 +76,8 @@ $I = (-562 + \text{A/D Value}) \cdot \frac{1}{27,8}$
 
 #### Display 
 ![image](https://github.com/user-attachments/assets/7bee33f4-e9fd-4415-8c4b-683bdc1ebba1) \
-*OLED display, from [6]* \
+*OLED display, from [6]* 
+
 Jako display je využíván OLED s rozlišením 168x64. Display komuniku je přes IIC.
 
 
