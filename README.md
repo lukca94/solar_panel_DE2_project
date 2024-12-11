@@ -23,6 +23,8 @@ Structure of code
   
 ### Hardware setup
 Hardware connection is showed on schematic below.
+
+
 ### Software setup
 
 #### Servo
@@ -32,4 +34,8 @@ Hardware connection is showed on schematic below.
 #### Display 
 
 ### Used parts
-
+ - Arduino NANO
+ - 2x Servo motor SG90
+ - OLED display (168x64, IIC)
+ - 4x Photoresistor
+ - Current sensor ACS712
