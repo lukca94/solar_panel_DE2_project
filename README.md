@@ -86,9 +86,9 @@ Jako display je využíván OLED s rozlišením 168x64. Display komuniku je pře
  - Current sensor ACS712
 
 ### Sources
-[1] https://www.studiopieters.nl/arduino-nano-pinout/
-[2] http://www.ee.ic.ac.uk/pcheung/teaching/DE1_EE/stores/sg90_datasheet.pdf
-[3] https://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-7810-Automotive-Microcontrollers-ATmega328P_Datasheet.pdf
-[4] https://www.laskakit.cz/arduino-proudovy-senzor-5a-acs712/?utm_source=google&utm_medium=cpc&utm_campaign=1_PLA_All_ROAS_%5BCZ%5D_tROAS_570%2F350&utm_id=1371265813&gad_source=1&gclid=CjwKCAiAjeW6BhBAEiwAdKltMkxjIJc-CQQdpvqv7aDmpNT8D9rHq1pxshQiIphx7CQkUo7BzBrefRoCjq4QAvD_BwE
-[5] https://www.laskakit.cz/user/related_files/acs712.pdf
-[6] https://www.hwkitchen.cz/graficky-displej-oled-096-128x64-i2c-bily/?gad_source=1&gclid=CjwKCAiAjeW6BhBAEiwAdKltMsdv_tMKsyUl8U-bwB8IE8ftAJTWY9HhmumnMm_Rn9zQiKFi_XuZ2xoCNjgQAvD_BwE
+[1] https://www.studiopieters.nl/arduino-nano-pinout/ \
+[2] http://www.ee.ic.ac.uk/pcheung/teaching/DE1_EE/stores/sg90_datasheet.pdf \
+[3] https://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-7810-Automotive-Microcontrollers-ATmega328P_Datasheet.pdf \
+[4] https://www.laskakit.cz/arduino-proudovy-senzor-5a-acs712/?utm_source=google&utm_medium=cpc&utm_campaign=1_PLA_All_ROAS_%5BCZ%5D_tROAS_570%2F350&utm_id=1371265813&gad_source=1&gclid=CjwKCAiAjeW6BhBAEiwAdKltMkxjIJc-CQQdpvqv7aDmpNT8D9rHq1pxshQiIphx7CQkUo7BzBrefRoCjq4QAvD_BwE \
+[5] https://www.laskakit.cz/user/related_files/acs712.pdf \
+[6] https://www.hwkitchen.cz/graficky-displej-oled-096-128x64-i2c-bily/?gad_source=1&gclid=CjwKCAiAjeW6BhBAEiwAdKltMsdv_tMKsyUl8U-bwB8IE8ftAJTWY9HhmumnMm_Rn9zQiKFi_XuZ2xoCNjgQAvD_BwE \
