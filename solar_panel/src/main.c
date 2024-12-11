@@ -126,9 +126,9 @@ int main(void)
 		uint16_t value = adc_read(pin);
 		char string[10];
 
-		value = 1000*(-565 + value) * (1/27.8); //Vale by chěla předělat do floatu hádám
+		value = 1000 * (-565 + value) * (1 / 27.8); // Vale by chěla předělat do floatu hádám
 
-		itoa(value, string, 10); 
+		itoa(value, string, 10);
 		uart_puts(string);
 		uart_puts("\n");
 		_delay_ms(100);
@@ -138,18 +138,15 @@ int main(void)
 		oled_puts("  ");
 		oled_display();
 
-
-
-		uint16_t intensity = (adc_read(PHOTO_RES1) + adc_read(PHOTO_RES1) + adc_read(PHOTO_RES1) + adc_read(PHOTO_RES1))/4;
-		uint16_t intensity = 100*(uint16_t intensity/760);
+		uint16_t intensity = (adc_read(PHOTO_RES1) + adc_read(PHOTO_RES1) + adc_read(PHOTO_RES1) + adc_read(PHOTO_RES1)) / 4;
+		intensity = 100 * (intensity / 760);
 		char string2[10];
-		itoa(intensity, string2, 10); 
+		itoa(intensity, string2, 10);
 		oled_gotoxy(9, 5);
 		oled_puts(string2);
 		oled_puts("  ");
 		oled_display();
 
-		
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 		// uint8_t pin0 = 0;
