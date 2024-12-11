@@ -25,7 +25,7 @@ Structure of code
 Hardware connection is showed on schematic below.
 ![schematic](https://github.com/user-attachments/assets/cd43df7a-ca8a-48cf-9797-bcc118313665)
 
-The schematic for the first prototype on the UNO arduino, unfortunately it does not have enough pins to read analog values. The first idea was to switch the signal source of one photoresistor with a current sensor (as shown in the schematic). Eventually we solved the problem by using the Arduino NANO board, which has up to 8 analogue pins. 4 of these pins are used to read the voltage level on the divider consisting of a resistor (10k) and a photoresistor (PC0, PC1, PC2, PC3). The connectors PC4 (SDA) and PC5 (SCL), are used for serial synchronous communication IIC, for writing data to the display. We connected a probe to analog pin 6.
+The schematic for the first prototype on the UNO arduino, unfortunately it does not have enough pins to read analog values. The first idea was to switch the signal source of one photoresistor with a current sensor (as shown in the schematic). Eventually we solved the problem by using the Arduino NANO board, which has up to 8 analogue pins. 4 of these pins are used to read the voltage level on the divider consisting of a resistor (10k) and a photoresistor (PC0, PC1, PC2, PC3). The connectors PC4 (SDA) and PC5 (SCL), are used for serial synchronous communication I2C, for writing data to the display. We connected a probe to analog pin 6.
 
 The pins PB1 (D9) and PB2 (D10) are used to control the resistors. The control is done by PWM signal. 
 
@@ -84,13 +84,13 @@ Used libraries from [7]:
               <oled.h>
               <font.h>
               
-Display works based on OLED technology and comunnicates with Arduino by I2C. Using pre-made libraries, such as twi or oled we were able to disply crutial parameters, which are widely used, when it comes to generating and monitoring electricity with solar panels. Due to a missing solar panel we had to improvise and set the current value based on intensity of the light comming to photoresistor, which led the panel directly to light source. Main thought was displaying range, in which the servos operates but because of different ranges of servos, we weren`t able to do that. Due to lack of time for demonstrating this work, we showed on display parameters, that would be crucial for another work. Instead of this the display showed intensity of light in percents (on photo the intensity should be on the last row) (when 2 photoresistors are lined up, intensity shows 50%, when all of them are lined up, it shows 100%)\
+Display works based on OLED technology and comunnicates with Arduino by I2C. Using pre-made libraries, such as twi or oled we were able to display crutial parameters, which are widely used, when it comes to generating and monitoring electricity with solar panels. Due to a missing solar panel we had to improvise and set the current value based on intensity of the light comming to photoresistor, which led the panel directly to light source. Main thought was displaying range, in which the servos operates but because of different ranges of servos, we weren`t able to do that. Due to lack of time for demonstrating this work, we showed on display parameters, that would be crucial for another work. Instead of this the display showed intensity of light in percents (on photo the intensity should be on the last row) (when 2 photoresistors are lined up, intensity shows 50%, when all of them are lined up, it shows 100%)\
 
 
 
 #### Photoresistors
 ![image](https://github.com/user-attachments/assets/487535ff-05be-4f0f-b1c6-c38676dc2e31)\
-*Photoresistor, from[9]*
+*Photoresistor, from[8]*
 
 This component can change its resistivity depending on the intensity of light falling on the sensor. The size of the resistance varies $R = 50 \, k \Omega - 5 \, M\Omega$. Because of the large value, we had to connect a resistor in series to the component ($R = 10 \, k\Omega$), thus creating a resistive divider, from which we then read the A/D converter data. The adc library is used for this. 
 
@@ -110,7 +110,7 @@ The function is to set the default position, then find the A/D converter with th
 
  - Arduino NANO
  - 2x Servo motor SG90
- - OLED display (168x64, IIC)
+ - OLED display (168x64, I2C)
  - 4x Photoresistor
  - Current sensor ACS712 (For demonstration there was only used potenciometer)
 
@@ -122,4 +122,5 @@ The function is to set the default position, then find the A/D converter with th
 [5] https://www.laskakit.cz/user/related_files/acs712.pdf \
 [6] https://www.hwkitchen.cz/graficky-displej-oled-096-128x64-i2c-bily/?gad_source=1&gclid=CjwKCAiAjeW6BhBAEiwAdKltMsdv_tMKsyUl8U-bwB8IE8ftAJTWY9HhmumnMm_Rn9zQiKFi_XuZ2xoCNjgQAvD_BwE \
 [7] https://github.com/tomas-fryza/avr-course \
-[8] https://www.deepl.com/cs/translator
+[8] https://dratek.cz/arduino/1073-fotorezistor-5mm-gl5539.html?gad_source=1&gclid=CjwKCAiAjeW6BhBAEiwAdKltMk4hdG6gO_9EMxPUfkeVdnoOveTsLkVY0bouLI8hhyk2V4RFQKNoZBoC1I0QAvD_BwE \
+[9] https://www.deepl.com/cs/translator \
