@@ -37,16 +37,10 @@ void oled_setup(void)
 	oled_puts("mA");
 
 	oled_gotoxy(0, 5);
-	oled_puts("Power:");
+	oled_puts("Intensity:");
 
 	oled_gotoxy(15, 5);
-	oled_puts("W/m2");
-
-	oled_gotoxy(0, 7);
-	oled_puts("Current:");
-
-	oled_gotoxy(15, 7);
-	oled_puts("A");
+	oled_puts("%");
 	// Copy buffer to display RAM
 	oled_display();
 }
@@ -132,17 +126,30 @@ int main(void)
 		uint16_t value = adc_read(pin);
 		char string[10];
 
-		value = (-565 + value) * (1/27.8); //Vale by chěla předělat do floatu hádám
+		value = 1000*(-565 + value) * (1/27.8); //Vale by chěla předělat do floatu hádám
 
-		itoa(value, string, 10); //A tohle taky nebo vypisovat rovnou ten float
+		itoa(value, string, 10); 
 		uart_puts(string);
 		uart_puts("\n");
 		_delay_ms(100);
 
-		oled_gotoxy(11, 7);
+		oled_gotoxy(9, 3);
 		oled_puts(string);
 		oled_puts("  ");
 		oled_display();
+
+
+
+		uint16_t intensity = (adc_read(PHOTO_RES1) + adc_read(PHOTO_RES1) + adc_read(PHOTO_RES1) + adc_read(PHOTO_RES1))/4;
+		uint16_t intensity = 100*(uint16_t intensity/760);
+		char string2[10];
+		itoa(intensity, string2, 10); 
+		oled_gotoxy(9, 5);
+		oled_puts(string2);
+		oled_puts("  ");
+		oled_display();
+
+		
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 		// uint8_t pin0 = 0;
